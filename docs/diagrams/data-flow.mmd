@@ -1,0 +1,13 @@
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant O as Orchestrator
+    participant M as Memory
+    participant N as Neural Model
+
+    U->>O: raw input
+    O->>M: record context
+    O->>N: encode + predict
+    N-->>O: logits
+    O-->>U: response
+```
