@@ -1,0 +1,38 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: trustlayer_db
+    environment:
+      POSTGRES_USER: trustlayer
+      POSTGRES_PASSWORD: trustlayer_dev_pass
+      POSTGRES_DB: trustlayer
+    ports:
+      - "5432:5432"
+    volumes:
+      - trustlayer_db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U trustlayer -d trustlayer"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  redis:
+    image: redis:7-alpine
+    container_name: trustlayer_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - trustlayer_redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+volumes:
+  trustlayer_db_data:
+  trustlayer_redis_data:
