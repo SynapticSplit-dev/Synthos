@@ -1,20 +1,32 @@
 # SYNTHOS documentation
 
-This directory contains the project documentation and system architecture references for the SYNTHOS runtime.
+This directory contains the implementation documentation, design notes, and architecture references for the SYNTHOS runtime.
 
-## Structure
+## Documentation structure
 
-The documentation is organized by domain:
-
-- project vision and architecture overview
-- workflow specifications
+- project vision
+- architecture overview
+- technology stack
+- repository structure
+- workflow documentation
 - neural network design
-- memory system documentation
-- development and testing guidance
-- roadmap and implementation status
+- memory model text
+- development guidance
+- roadmap and status
+- diagrams and Mermaid references
 
-## Start here
+## Suggested reading order
 
-- docs/README.md
-- docs/PROJECT_VISION.md
-- docs/SYSTEM_ARCHITECTURE.md
+1. docs/PROJECT_VISION.md
+2. docs/SYSTEM_ARCHITECTURE.md
+3. docs/TECH_STACK.md
+4. docs/REPOSITORY_STRUCTURE.md
+5. docs/workflows/workflow-overview.md
+6. docs/neural-networks/architecture.md
+7. docs/memory/memory-architecture.md
+8. docs/development/installation.md
+9. docs/roadmap/implementation-status.md
+
+## Implementation status
+
+The current repository contains a working local runtime foundation, workflow modules, documentation, and tests aligned with the SYNTHOS architecture.

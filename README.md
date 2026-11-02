@@ -1,92 +1,73 @@
 # SYNTHOS
 
-SYNTHOS is a compact AI system architecture built around a modular runtime, neural network primitives, memory subsystems, and workflow orchestration. The project centers on a simple but extensible Python implementation that can be developed and tested locally without requiring enterprise-scale infrastructure.
+SYNTHOS is a modular AI runtime focused on input processing, reasoning, memory, learning, inference, and workflow orchestration. This repository now contains a coherent local implementation using Python and lightweight machine learning primitives, while preserving the existing backend foundation.
 
-## Vision
+## Project vision
 
-The project aims to provide a coherent and understandable architecture for:
+The goal of SYNTHOS is to provide a clear, extensible architecture for an AI system that can execute locally and remain understandable. The codebase deliberately favors small but working components over unsupported large-scale claims.
 
-- input processing and normalization
-- reasoning and task interpretation
-- neural feature encoding and inference
-- in-memory memory management
-- workflow coordination
-- training and evaluation loops
-- documentation and maintenance
+## Core architecture
 
-## Objectives
+- Core runtime: central module registry and lifecycle manager
+- Input processing: text normalization, tokenization, and payload preparation
+- Intelligence engine: intent classification and reasoning
+- Memory system: in-memory working, short-term, semantic, and retrieval context
+- Neural network: small feed-forward model for encoding and prediction
+- Training workflow: lightweight local optimization loop
+- Inference workflow: prediction over user text
+- Orchestration: end-to-end execution across runtime components
 
-- Build a clear, maintainable AI system structure.
-- Keep the runtime modular and testable.
-- Use a small neural network that works in constrained environments.
-- Provide memory operations for working, semantic, and short-term contexts.
-- Document the architecture and lifecycle clearly.
-- Deliver a working end-to-end workflow with actual code and tests.
+## Current capabilities
 
-## Core Architecture
+- raw text normalization and tokenization
+- rule-based intent understanding
+- memory add/search/update/expire operations
+- compact neural network with forward pass and checkpoint persistence
+- training and inference workflow APIs
+- automated workflow tests
+- architecture documentation and Mermaid diagrams
 
-SYNTHOS combines a runtime registry, input processor, memory store, neural network, intelligence engine, and orchestrator. These components are wired together in a central runtime builder and exposed through a small set of Python interfaces.
-
-## Main Capabilities
-
-- Text normalization and tokenization
-- intent classification
-- memory add/search/update/expire flows
-- inference over tokenized inputs
-- checkpoint save/load for the neural model
-- training workflow with loss and accuracy metrics
-- documentation and diagrammatic architecture reference
-
-## Neural Network Architecture
-
-The current implementation uses a compact feed-forward neural network with:
-
-- embedding lookup derived from token hash
-- feature vector projection into a hidden layer
-- tanh activation
-- classification output layer
-- deterministic training step and loss computation
-
-This is intentionally lightweight and appropriate for a local repository implementation rather than a large production language model.
-
-## Memory Architecture
-
-The memory layer supports:
-
-- working memory
-- short-term memory
-- semantic memory
-- retrieval by content overlap
-- context reconstruction
-- expiration logic
-
-## Workflow Overview
-
-The project includes workflow stages for:
-
-1. input processing
-2. reasoning and task interpretation
-3. memory management
-4. neural processing
-5. inference and prediction
-6. training and evaluation
-
-## Technology Stack
+## Technology stack
 
 - Python 3.11+
 - NumPy
-- FastAPI (existing backend foundation)
-- SQLAlchemy / PostgreSQL-ready configuration
-- Pydantic settings
+- FastAPI
+- SQLAlchemy
+- Pydantic and Pydantic settings
 - pytest
+- Markdown and Mermaid documentation
 
-## Repository Structure
+## Repository structure
 
-- backend/app/synthos: SYNTHOS runtime modules
-- backend/app/core: existing security and ledger utilities
-- backend/app/models: SQLAlchemy models
-- backend/tests: automated tests
-- docs: architecture and project documentation
+```text
+SYNTHOS/
+├── README.md
+├── .env.example
+├── backend/
+│   ├── app/
+│   │   ├── core/
+│   │   ├── models/
+│   │   ├── services/
+│   │   └── synthos/
+│   ├── tests/
+│   └── pyproject.toml
+├── docs/
+│   ├── README.md
+│   ├── PROJECT_VISION.md
+│   ├── SYSTEM_ARCHITECTURE.md
+│   ├── TECH_STACK.md
+│   ├── REPOSITORY_STRUCTURE.md
+│   ├── architecture/
+│   ├── workflows/
+│   ├── neural-networks/
+│   ├── memory/
+│   ├── development/
+│   ├── roadmap/
+│   └── diagrams/
+├── docker-compose.yml
+├── LICENSE
+└── Makefile
+```
 
 ## Installation
 
@@ -98,15 +79,15 @@ pip install -U pip
 pip install numpy pytest fastapi sqlalchemy pydantic pydantic-settings httpx redis asyncpg argon2-cffi pyjwt structlog
 ```
 
-## Environment Configuration
+## Configuration
 
-Copy the example environment file and adjust the values:
+Use the example environment file and adjust the values for your local execution context:
 
 ```bash
 cp .env.example .env
 ```
 
-## Running the Project
+## Running the app
 
 ```bash
 cd backend
@@ -120,52 +101,39 @@ cd backend
 PYTHONPATH=. pytest -q
 ```
 
-## Training
+## Training and inference
 
 ```python
 from app.synthos.training import TrainingWorkflow
-
-workflow = TrainingWorkflow()
-examples = [["hello", "world"], ["memory", "retrieval"], ["train", "model"]]
-labels = [0, 1, 1]
-print(workflow.fit(examples, labels, epochs=5))
-```
-
-## Inference
-
-```python
 from app.synthos.inference import InferenceWorkflow
 
-workflow = InferenceWorkflow()
-print(workflow.run("remember the previous result"))
+training = TrainingWorkflow()
+history = training.fit([["learn", "model"], ["system", "memory"]], [0, 1], epochs=2)
+print(history)
+
+inference = InferenceWorkflow()
+print(inference.run("remember the training result"))
 ```
 
-## Development Roadmap
+## Current implementation status
 
-- complete architecture and documentation
-- expand model capability and memory indexing
-- improve workflow interfaces and validation
-- add richer inference and training pipelines
-- support persistent storage and retrieval
+This repository currently includes:
 
-## Current Status
-
-The project currently includes:
-
-- runtime registry and orchestration
+- functional runtime registry and orchestration
 - input processing and tokenization
-- memory store with search and expiry
-- neural network implementation
+- in-memory memory management
+- compact neural network implementation
 - inference and training workflows
-- test suite and architecture documentation
+- documentation tree and architecture diagrams
+- automated tests covering core workflow behavior
 
-## Known Limitations
+## Known limitations
 
-- the neural model is intentionally lightweight
-- memory is in-memory rather than durable storage-backed
-- the system is designed for local execution and experimentation
-- production-scale language modeling is not implied by the current implementation
+- memory is currently in-memory rather than persistent
+- model is intentionally lightweight rather than large-scale
+- functionality is local-development oriented and transparent
+- extended transformer architecture is planned rather than implemented
 
----
+## Final note
 
-This repository provides a working local foundation for SYNTHOS and a faithful implementation trail that matches the specification without inventing unsupported large-scale capabilities.
+This project is intended to be a working and technically understandable implementation of the SYNTHOS architecture without claiming capabilities beyond the code that has actually been built and tested.
